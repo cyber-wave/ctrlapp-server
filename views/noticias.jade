@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Mandar Noticias
+    form(action="/", method="post")
+        div.form-group
+            label(for="titulo") Titulo
+            input.form-control#titulo(type="text", name="titulo")
+        .form-group
+            label(for="corpo") Corpo da Mensagem
+            input.form-control#corpo(type="text", name="corpo")
+        .form-group
+            label(for="topico") Tópico
+            input.form-control#topico(type="text", name="topico")
+        .form-group
+            input(type="submit", value="Postar Notícia")
