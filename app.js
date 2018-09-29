@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var secure = require('express-force-https');
 var session = require('express-session');
-var pg = require('pg');
+
+var mosca = require('mosca'); //somos amantes de insetos
 
 
 //routers
@@ -35,6 +36,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/noticia', noticiaRouter);
+
+
+///MOSCA
+var moscaSettings = {
+  port: 1883 //mqtt port
+}
+var moscaServer = mosca.Server(moscaSettings);
+moscaServer.on('ready',()=>{
+  console.log("[MQTT] Mosca está voando alto na porta 1883!");
+});
+
+moscaServer.on('clientConnected', function(client) {
+  console.log('Client Connected:', client.id);
+});
+
+moscaServer.on('clientDisconnected', function(client) {
+  console.log('Client Disconnected:', client.id);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
