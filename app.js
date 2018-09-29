@@ -13,6 +13,7 @@ var mosca = require('mosca'); //somos amantes de insetos
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var noticiaRouter = require('./routes/noticia');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -33,9 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//ROUTES
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/noticia', noticiaRouter);
+app.use('/login', loginRouter)
 
 
 ///MOSCA

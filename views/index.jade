@@ -4,12 +4,10 @@ extends layout
 block content
   include ./navbar.jade
   .container
-    h1 #{title}
-    form.form-horizontal(method="post", id="loginForm")
-      label Username
-      input.span3(id="username", type="text", name="User", placeholder="Enter your username")
-      label Password
-      input.span3(id="password", type="password", name="Password")
-      input.btn(type="submit", value="Log In")
-    a(href="/noticia") Mandar Noticias
+    h1 CtrlApp
+    if user
+      h4 Bem vindo, #{user}!
+      a(href="/noticia") Publicar noticia
+    else
+      h4 Entre para continuar.
   

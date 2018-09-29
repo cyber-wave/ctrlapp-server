@@ -24,7 +24,11 @@ class UsuarioDAO{
      */
      static async getUsuario(login){
         var data = await db.one("SELECT * FROM usuario WHERE usuario.login = $1",login)
-        console.log(data);
+        
+        if(!data){
+            //o usuario nao existe
+            throw new Error("Usuario nao existe");
+        }
         return new Usuario(data.login, data.email, data.senha, data.msg_id);
         
     }
